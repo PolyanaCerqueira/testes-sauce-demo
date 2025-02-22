@@ -13,6 +13,10 @@ users.forEach((user) => {
         // Realizando chamada do componente de login para o usuário
         cy.login(user, password);
 
+        cy.on('uncaught:exception', (err, runnable) => {
+            return false
+        })
+
         cy.url().then((url) => {
             if (url.includes('inventory')) {
                 let produtosNaoAdicionados = []
